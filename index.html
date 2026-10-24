@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RESONANCE — PROJECT 25</title>
+<!-- Google Fonts: Unbounded (Y2K / Futuristic) & Space Grotesk -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#020b14;--bg2:#0a3a5c;--bg3:#1e6091;--ink:#fff;--cy:#7dd3fc;--glass:rgba(255,255,255,.12);--line:rgba(255,255,255,.28);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#01060c}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;
+background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 65%,var(--bg3) 140%) fixed;min-height:100vh;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+main,header{position:relative;z-index:1}
+header{position:sticky;top:env(safe-area-inset-top,0px);display:flex;justify-content:space-between;align-items:center;padding:14px 20px;backdrop-filter:blur(8px);background:rgba(2,11,20,.45);z-index:5}
+header b{font-family:'Unbounded',sans-serif;letter-spacing:.15em;font-weight:900;font-size:16px;text-transform:uppercase;text-shadow:0 0 12px var(--cy)}
+nav a{color:var(--ink);text-decoration:none;margin-left:16px;font-size:13px;opacity:.85;text-transform:lowercase}
+nav a:hover{color:var(--cy)}#mus{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:4px 10px;margin-left:14px;cursor:pointer}
+section{padding:70px 20px;max-width:900px;margin:auto}
+.hero{min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.moon{width:120px;height:120px;border-radius:50%;box-shadow:-25px 8px 0 0 #fff;margin:0 0 35px 30px;filter:drop-shadow(0 0 22px var(--cy));animation:glow 4s ease-in-out infinite}
+@keyframes glow{50%{filter:drop-shadow(0 0 40px #38bdf8)}}
+h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(26px,6vw,52px);margin:0 0 10px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 0 20px rgba(125,211,252,.6)}
+h2{font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.08em;font-size:22px;text-transform:uppercase;margin-top:40px}
+p.sub{opacity:.85;letter-spacing:.1em;text-transform:lowercase;margin-bottom:25px}
+
+/* Countdown Timer Styling */
+.countdown-box{display:flex;gap:12px;justify-content:center;margin:20px 0 30px}
+.time-block{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:65px;backdrop-filter:blur(8px)}
+.time-val{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;color:var(--cy);text-shadow:0 0 10px var(--cy)}
+.time-lbl{font-size:10px;letter-spacing:.1em;opacity:.7;margin-top:4px;text-transform:uppercase}
+
+/* Constellation / Phases styling */
+.constellation{position:relative;margin:30px 0 60px;padding-left:30px;border-left:2px dashed var(--cy)}
+.phase-node{position:relative;margin-bottom:30px;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:16px 20px;backdrop-filter:blur(10px)}
+.phase-node::before{content:'';position:absolute;left:-37px;top:20px;width:12px;height:12px;background:var(--cy);border-radius:50%;box-shadow:0 0 10px var(--cy), 0 0 20px var(--cy)}
+.phase-num{font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:.15em;color:var(--cy);text-transform:uppercase;margin-bottom:6px}
+.phase-title{font-family:'Unbounded',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+/* Boarding Pass Styling */
+.pass-card{background:linear-gradient(135deg, rgba(255,255,255,.18) 0%, rgba(2,11,20,.6) 100%);border:2px dashed var(--cy);border-radius:20px;padding:24px;max-width:480px;margin:20px auto;backdrop-filter:blur(12px);box-shadow:0 0 30px rgba(125,211,252,.25);position:relative;text-align:left}
+.pass-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px}
+.pass-header b{font-family:'Unbounded',sans-serif;letter-spacing:.2em;color:var(--cy);font-size:14px}
+.pass-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.pass-item small{display:block;font-size:10px;opacity:.7;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.pass-item span{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700}
+.pass-footer{border-top:1px dashed var(--line);padding-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:11px;opacity:.8}
+
+.tl{border-left:1px solid var(--line);padding-left:20px;margin-top:20px}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 20px;backdrop-filter:blur(10px);margin-bottom:16px}
+.card small{color:var(--cy);display:block;margin-bottom:8px;font-size:14px;letter-spacing:.05em;font-family:'Unbounded',sans-serif;font-weight:700}
+form{max-width:520px;margin:auto}
+input,textarea{width:100%;background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font:inherit;margin:6px 0 12px;text-transform:none}
+textarea{min-height:150px;resize:vertical}
+.cnt{text-align:right;font-size:12px;opacity:.7;margin-top:-8px}
+.ics{display:flex;gap:10px;margin:8px 0 18px}.ics button{font-size:24px;background:var(--glass);border:1px solid transparent;border-radius:12px;padding:6px 10px;cursor:pointer}
+.ics button.on{border-color:#fff;box-shadow:0 0 12px var(--cy)}
+.go{width:100%;padding:14px;border-radius:30px;border:1px solid #fff;background:rgba(255,255,255,.18);color:#fff;font:inherit;cursor:pointer;letter-spacing:.1em;font-family:'Unbounded',sans-serif;font-weight:700;text-transform:uppercase}
+.go:hover{background:rgba(255,255,255,.3)}
+.hp{position:absolute;left:-9999px}
+#pop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:20;padding:20px}
+#pop div{max-width:340px;text-align:center}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.bar button,.bar input{width:auto;margin:0;padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit;cursor:pointer}
+.wall{columns:3 260px;column-gap:16px}.wall .card{break-inside:avoid;animation:in 1.2s ease}
+@keyframes in{from{opacity:0;transform:translateY(20px);box-shadow:0 0 0 #fff}to{opacity:1}}
+.wall .card.new{box-shadow:0 0 30px var(--cy)}
+.wall.float{height:70vh;overflow:hidden;columns:3 260px}.wall.float .inner{animation:scr 60s linear infinite}
+@keyframes scr{to{transform:translateY(-50%)}}
+.grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}.grid .card{width:170px;font-size:12px;transition:.3s;margin:0}
+.grid .card:hover{transform:scale(1.7);z-index:3;background:rgba(2,11,20,.95)}
+.msg{white-space:pre-wrap;line-height:1.6;font-size:14px}
+.row{display:flex;gap:8px;margin-top:10px}.row button{flex:1;padding:6px;border-radius:10px;border:1px solid var(--line);background:var(--glass);color:#fff;cursor:pointer}
+.empty{opacity:.7;text-align:center}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<header><b>RESONANCE</b><nav><a href="#about">about</a><a href="#pass">boarding pass</a><a href="#bio">biography</a><a href="#send">send a letter</a><a href="#wall">live wall</a><a href="#admin">admin</a><button id="mus" title="nhạc nền">♪ off</button></nav></header>
+<main>
+<div id="v-home">
+<section class="hero" id="about">
+<div class="moon" id="moon"></div>
+<h1>PROJECT 25: RESONANCE</h1>
+<p class="sub">five phases, one heartbeat.</p>
+
+<!-- Countdown Timer đến 19/11/2026 -->
+<div class="countdown-box">
+  <div class="time-block"><div class="time-val" id="d">00</div><div class="time-lbl">ngày</div></div>
+  <div class="time-block"><div class="time-val" id="h">00</div><div class="time-lbl">giờ</div></div>
+  <div class="time-block"><div class="time-val" id="m">00</div><div class="time-lbl">phút</div></div>
+  <div class="time-block"><div class="time-val" id="s">00</div><div class="time-lbl">giây</div></div>
+</div>
+</section>
+
+<!-- Section Boarding Pass độc bản -->
+<section id="pass">
+<h2>SPACE BOARDING PASS</h2>
+<p class="sub">nhận vé hành trình độc bản lên chuyến tàu resonance</p>
+<div id="pass-box"></div>
+</section>
+
+<section>
+<h2>5 PHASES OF RESONANCE</h2>
+<div class="constellation">
+  <div class="phase-node"><div class="phase-num">phase 01</div><div class="phase-title">Charity (HN)</div></div>
+  <div class="phase-node"><div class="phase-num">phase 02</div><div class="phase-title">Photobooth frame</div></div>
+  <div class="phase-node"><div class="phase-num">phase 03</div><div class="phase-title">Instagram ads</div></div>
+  <div class="phase-node"><div class="phase-num">phase 04</div><div class="phase-title">Digital Guestbook</div></div>
+  <div class="phase-node"><div class="phase-num">phase 05</div><div class="phase-title">Led project + Offline (TPHCM)</div></div>
+</div>
+
+<h2 id="bio">WREN EVANS • BIOGRAPHY & ACHIEVEMENTS</h2>
+<h3 style="font-family:'Unbounded',sans-serif;font-size:16px;margin-top:24px;color:var(--cy)">HÀNH TRÌNH ÂM NHẠC</h3>
+<div class="tl" id="tl-journey"></div>
+
+<h3 style="font-family:'Unbounded',sans-serif;font-size:16px;margin-top:36px;color:var(--cy)">THÀNH TÍCH & GIẢI THƯỞNG</h3>
+<div class="tl" id="tl-awards"></div>
+</section>
+
+<section id="send"><h2>SEND A LETTER</h2>
+<form id="f" autocomplete="off">
+<label>name / handle<input id="nm" maxlength="40" required></label>
+<label>your letter to wren<textarea id="tx" maxlength="1000" required></textarea></label>
+<div class="cnt"><span id="c">0</span>/1000</div>
+<div>select your icon</div><div class="ics" id="ics"></div>
+<input class="hp" id="hp" tabindex="-1" autocomplete="off">
+<button class="go" id="sb">send into the universe ✨</button></form></section>
+</div>
+
+<div id="v-wall" hidden><section style="max-width:1200px"><h2>LIVE WALL</h2>
+<div class="bar"><button id="b-float">presentation</button><button id="b-grid">grid view</button><input id="q" placeholder="tìm theo tên..."><button id="b-fs">toàn màn hình</button></div>
+<div id="wall"></div></section></div>
+
+<div id="v-admin" hidden><section><h2>ADMIN</h2>
+<div id="lg"><input id="pin" type="password" placeholder="mã quản trị"> <button class="go" style="width:auto;padding:10px 24px" id="lgb">đăng nhập</button></div>
+<div id="adm" hidden></div></section></div>
+</main>
+
+<div id="pop"><div class="card"><p>thư của bạn đã được gửi vào vũ trụ RESONANCE. cảm ơn bạn!</p><button class="go" onclick="this.closest('#pop').style.display='none'">đóng</button></div></div>
+
+<script>
+const K='res_letters';
+const load=()=>{try{return JSON.parse(localStorage.getItem(K))||[]}catch(e){return[]}};
+const save=a=>{try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}};
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);
+
+/* Starfield background */
+const cv=$('stars'),cx=cv.getContext('2d');let S=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight;S=Array.from({length:Math.min(140,innerWidth/8)},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4+.3,p:Math.random()*6,v:Math.random()*.02+.005}))}
+addEventListener('resize',rs);rs();
+(function t(){cx.clearRect(0,0,cv.width,cv.height);for(const s of S){s.p+=s.v*3;cx.globalAlpha=.35+.65*Math.abs(Math.sin(s.p));cx.fillStyle='#7dd3fc';cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill();s.y-=s.v;if(s.y<0)s.y=cv.height}requestAnimationFrame(t)})();
+
+/* Countdown Timer đến 19/11/2026 */
+const targetDate = new Date('2026-11-19T00:00:00').getTime();
+function updateCountdown(){
+  const now = new Date().getTime();
+  const gap = targetDate - now;
+  if(gap < 0){
+    $('d').textContent='00';$('h').textContent='00';$('m').textContent='00';$('s').textContent='00';
+    return;
+  }
+  const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+  const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((gap % (1000 * 60)) / 1000);
+  $('d').textContent = String(d).padStart(2,'0');
+  $('h').textContent = String(h).padStart(2,'0');
+  $('m').textContent = String(m).padStart(2,'0');
+  $('s').textContent = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* Boarding Pass Logic (Độc bản 1 lần duy nhất trên máy) */
+const PASS_KEY = 'res_space_pass';
+function renderPass(){
+  const box = $('pass-box');
+  const savedPass = localStorage.getItem(PASS_KEY);
+  if(savedPass){
+    const p = JSON.parse(savedPass);
+    box.innerHTML = `
+      <div class="pass-card">
+        <div class="pass-header">
+          <b>FLIGHT: RESONANCE</b>
+          <span style="font-size:12px; color:var(--cy)">#25</span>
+        </div>
+        <div class="pass-grid">
+          <div class="pass-item"><small>passenger / handle</small><span>${esc(p.name)}</span></div>
+          <div class="pass-item"><small>destination</small><span>wren evans 25th</span></div>
+          <div class="pass-item"><small>issued date</small><span>${p.date}</span></div>
+          <div class="pass-item"><small>status</small><span style="color:#7dd3fc">verified ✨</span></div>
+        </div>
+        <div class="pass-footer">
+          <span>serial: ${p.serial}</span>
+          <span>exclusive pass</span>
+        </div>
+      </div>
+      <p style="font-size:12px; opacity:0.6; margin-top:10px">vé thông hành độc bản của bạn đã được lưu trữ an toàn trên thiết bị này.</p>
+    `;
+  } else {
+    box.innerHTML = `
+      <form id="pass-form" style="max-width:400px; margin:auto">
+        <label>nhập tên hoặc handle của bạn để nhận vé<input id="pass-name" maxlength="30" placeholder="ví dụ: @_wren.paradox_" required></label>
+        <button type="submit" class="go" style="margin-top:10px">phát hành vé độc bản 🎫</button>
+      </form>
+    `;
+    $('pass-form').onsubmit = e => {
+      e.preventDefault();
+      const nameVal = $('pass-name').value.trim();
+      if(!nameVal) return;
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN');
+      const serialNum = 'RES-' + Math.floor(100000 + Math.random() * 900000);
+      const passData = { name: nameVal, date: dateStr, serial: serialNum };
+      localStorage.setItem(PASS_KEY, JSON.stringify(passData));
+      renderPass();
+    };
+  }
+}
+renderPass();
+
+/* biography & achievements */
+const journeyData = [
+  { time: '• 2020: Khởi đầu ở tuổi 19', text: '- 28/05/2020: Chính thức chào sân Vpop bằng đĩa đơn ‘Fever’ kết hợp cùng K-ICM. Tuy mới 19 tuổi, Wren đã nhanh chóng thu hút sự chú ý nhờ tư duy làm nhạc hiện đại và màu sắc cá tính rất riêng.' },
+  { time: '• 2022: Bản hit quốc dân & EP đầu tay', text: '- Bùng nổ khắp các nền tảng với siêu hit ‘Thích Em Hơi Nhiều’, vượt mốc 42 triệu lượt xem và đưa tên tuổi Wren phủ sóng rộng rãi.\n- 08/12/2022: Khẳng định dấu ấn nghệ thuật qua EP đầu tay ‘Chiều Hôm Ấy Anh Thấy Màu Đỏ’.' },
+  { time: '• 2023: Kỷ nguyên ‘Loi Choi’ càn quét', text: '- Một năm hoạt động cực kỳ năng suất với chuỗi sản phẩm định hình phong cách Neo Pop Punk:\n  - 25/05/2023: Trình làng đĩa đơn mở đường ‘Việt Kiều’ đầy phá cách khi pha trộn đa ngôn ngữ.\n  - 15/08/2023: Tiếp nối năng lượng rực rỡ với ‘Call Me’.\n  - 25/10/2023: Ra mắt bản hit ‘Từng Quen’, lập tức càn quét top 1 các BXH âm nhạc uy tín (Apple Music, Spotify, Zing MP3).\n  - 17/12/2023: Chính thức thả xích trọn vẹn album ‘Loi Choi: The Neo Pop Punk’, tạo nên cơn sốt lớn trong cộng đồng yêu nhạc.' },
+  { time: '• 2024 – 2026: Vươn tầm & cột mốc tuổi 25', text: '- Kết hợp cùng producer itsnk ra mắt album ‘Nổ’. Dự án xuất sắc cán đích ở vị trí #6 trên BXH Top Albums Debut Global của Spotify, thiết lập kỷ lục là album Vpop có thứ hạng debut cao nhất trên bảng xếp hạng toàn cầu này.\n- Đến năm 2026, Wren tiếp tục tạo tiếng vang lớn tại Tinh Hà ‘Say Hi’ và chính thức bước vào chương mới với project RESONANCE, đánh dấu cột mốc tuổi 25 rực rỡ cùng Phans.' }
+];
+
+const awardsData = [
+  { time: '• Năm 2021', text: '- MTV Fan Choice 2021: Ẵm giải sản phẩm âm nhạc hay nhất (‘Thích Em Hơi Nhiều’).\n- Làn Sóng Xanh 2021: Chiến thắng hạng mục Gương mặt mới xuất sắc.' },
+  { time: '• Năm 2022', text: '- MTV Fan Choice 2022: Đoạt giải sản phẩm âm nhạc được yêu thích nhất (‘Gặp May’).\n- Giải thưởng Truyền hình Châu Á (ATA): Nhận đề cử Video âm nhạc hay nhất (MV ‘Gặp May’).' },
+  { time: '• Năm 2023 – 2024', text: '- Làn Sóng Xanh 2023: Thắng lớn 2 cúp quan trọng gồm Ca sĩ đột phá và Album của năm (Album ‘Loi Choi’). Đồng thời nhận thêm các đề cử Nam ca sĩ được yêu thích nhất, Nhà sản xuất âm nhạc của năm, Hoà âm phối khí.\n- Best of 2023: Lập cú đúp lọt top 10 Nghệ sĩ xuất sắc năm 2023 và top 10 Bài hát xuất sắc (‘Từng Quen’).\n- Giải thưởng Cống hiến 2024: Nhận 3 đề cử lớn gồm Nam ca sĩ của năm, Bài hát của năm (‘Từng Quen’) và Album của năm (‘Loi Choi’).\n- WeChoice Awards 2023: Nhận 3 đề cử quan trọng cho Bài hát của năm, Album/E.P của năm và Ca sĩ/Rapper có hoạt động đột phá.' },
+  { time: '• Năm 2026', text: '- L\'Officiel Beauty Choice Awards 2026: Đoạt giải Best Visual in Music Project of the Year, vinh danh hình ảnh và thẩm mỹ xuất sắc trong dự án âm nhạc (Album ‘Nổ’ ft. itsnk).\n- Tinh Hà ‘Say Hi’ (2026): Vinh danh danh hiệu The Music Creative Icon (Anh trai sáng tạo âm nhạc ấn tượng nhất).' }
+];
+
+$('tl-journey').innerHTML = journeyData.map(x=>`<div class="card"><small>${x.time}</small><div class="msg">${x.text}</div></div>`).join('');
+$('tl-awards').innerHTML = awardsData.map(x=>`<div class="card"><small>${x.time}</small><div class="msg">${x.text}</div></div>`).join('');
+
+/* form */
+let icon='🩵';
+$('ics').innerHTML=['🩵','🦊','💝','🌙','✨'].map(i=>`<button type="button" class="${i===icon?'on':''}">${i}</button>`).join('');
+$('ics').onclick=e=>{if(e.target.tagName!=='BUTTON')return;icon=e.target.textContent;[...$('ics').children].forEach(b=>b.classList.toggle('on',b===e.target))};
+$('tx').oninput=()=>$('c').textContent=$('tx').value.length;
+$('f').onsubmit=e=>{e.preventDefault();
+ if($('hp').value)return; 
+ const day=new Date().toDateString();let rl={};try{rl=JSON.parse(localStorage.getItem('res_rl'))||{}}catch(_){}
+ if(rl.d!==day)rl={d:day,n:0};
+ if(rl.n>=3){alert('bạn đã gửi tối đa 3 thư hôm nay, mai quay lại nhé 🌙');return}
+ const a=load();a.push({id:Date.now()+''+Math.random().toString(36).slice(2,6),name:$('nm').value.trim().slice(0,40),text:$('tx').value.trim().slice(0,1000),icon,status:'pending',ts:Date.now()});save(a);
+ rl.n++;try{localStorage.setItem('res_rl',JSON.stringify(rl))}catch(_){}
+ fly()};
+function fly(){const f=$('f'),r=f.getBoundingClientRect(),m=$('moon').getBoundingClientRect();
+ const d=document.createElement('div');d.style.cssText=`position:fixed;left:${r.left+r.width/2-6}px;top:${r.top+r.height/2-6}px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 20px 8px #7dd3fc;z-index:30`;
+ document.body.appendChild(d);f.style.transition='.5s';f.style.opacity=0;f.style.transform='scale(.05)';
+ const dx=m.left+m.width/2-(r.left+r.width/2),dy=m.top+m.height/2-(r.top+r.height/2);
+ scrollTo({top:0,behavior:'smooth'});
+ d.animate([{transform:'translate(0,0)'},{transform:`translate(${dx}px,${dy}px) scale(.3)`,opacity:.2}],{duration:1600,easing:'ease-in',fill:'forwards'}).onfinish=()=>{d.remove();$('pop').style.display='flex';f.reset();$('c').textContent=0;f.style.opacity=1;f.style.transform='none'}}
+
+/* wall */
+let mode='float',lastIds=new Set();
+function renderWall(){const q=$('q').value.toLowerCase(),a=load().filter(x=>x.status==='approved'&&x.name.toLowerCase().includes(q)).sort((x,y)=>x.ts-y.ts);
+ const w=$('wall');if(!a.length){w.className='';w.innerHTML='<p class="empty">chưa có thư nào được duyệt ✨</p>';return}
+ const html=a.map(x=>`<div class="card ${lastIds.size&&!lastIds.has(x.id)?'new':''}"><div class="msg">${esc(x.text)}</div><p><small>${esc(x.name)} ${x.icon}</small></p></div>`).join('');
+ if(mode==='float'){w.className='wall float';w.innerHTML=`<div class="inner">${html}${a.length>3?html:''}</div>`}
+ else{w.className='grid';w.innerHTML=html}
+ lastIds=new Set(a.map(x=>x.id))}
+$('b-float').onclick=()=>{mode='float';renderWall()};$('b-grid').onclick=()=>{mode='grid';renderWall()};
+$('q').oninput=renderWall;$('b-fs').onclick=()=>document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+
+/* admin */
+let ok=false;
+$('lgb').onclick=()=>{if($('pin').value==='1009'){ok=true;$('lg').hidden=true;$('adm').hidden=false;renderAdm()}else alert('sai mã')};
+function renderAdm(){const a=load().sort((x,y)=>y.ts-x.ts);
+ $('adm').innerHTML=a.length?a.map(x=>`<div class="card"><small>trạng thái: ${x.status}</small><div class="msg">${esc(x.text)}</div><p><small>${esc(x.name)} ${x.icon}</small></p><div class="row"><button data-i="${x.id}" data-s="approved">approve</button><button data-i="${x.id}" data-s="hidden">hide</button></div></div>`).join(''):'<p class="empty">chưa có thư nào</p>'}
+$('adm').onclick=e=>{const b=e.target.closest('button');if(!b||!ok)return;const a=load();const l=a.find(x=>x.id===b.dataset.i);if(l){l.status=b.dataset.s;save(a);renderAdm()}};
+
+/* router + live sync */
+function route(){const h=location.hash;const w=h==='#wall',ad=h==='#admin';
+ $('v-home').hidden=w||ad;$('v-wall').hidden=!w;$('v-admin').hidden=!ad;
+ if(w)renderWall();if(ad&&ok)renderAdm()}
+addEventListener('hashchange',route);
+addEventListener('storage',e=>{if(e.key===K){if(!$('v-wall').hidden)renderWall();if(!$('v-admin').hidden&&ok)renderAdm()}});
+route();
+
+/* nhạc nền auto-on (file audio.m4a) */
+let au = new Audio('audio.m4a');
+au.loop = true;
+
+au.play().then(() => {
+    $('mus').textContent = '♪ on';
+}).catch(() => {
+    const unlockAudio = () => {
+        au.play().then(() => {
+            $('mus').textContent = '♪ on';
+            document.removeEventListener('click', unlockAudio);
+            document.removeEventListener('touchstart', unlockAudio);
+        }).catch(() => {});
+    };
+    document.addEventListener('click', unlockAudio);
+    document.addEventListener('touchstart', unlockAudio);
+});
+
+$('mus').onclick = () => {
+    if (au.paused) {
+        au.play().catch(() => {});
+        $('mus').textContent = '♪ on';
+    } else {
+        au.pause();
+        $('mus').textContent = '♪ off';
+    }
+};
+</script>
+</body>
+</html>

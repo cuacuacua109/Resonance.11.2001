@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>RESONANCE — PROJECT 25</title>
-<!-- Google Fonts: Unbounded (Y2K / Futuristic) & Space Grotesk -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
@@ -23,26 +22,25 @@ nav a{color:var(--ink);text-decoration:none;margin-left:16px;font-size:13px;opac
 nav a:hover{color:var(--cy)}#mus{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:4px 10px;margin-left:14px;cursor:pointer}
 section{padding:70px 20px;max-width:900px;margin:auto}
 .hero{min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.moon{width:120px;height:120px;border-radius:50%;box-shadow:-25px 8px 0 0 #fff;margin:0 0 35px 30px;filter:drop-shadow(0 0 22px var(--cy));animation:glow 4s ease-in-out infinite}
+.moon{width:120px;height:120px;margin:0 0 12px;filter:drop-shadow(0 0 22px var(--cy));animation:glow 4s ease-in-out infinite}
+.moon svg{width:100%;height:100%;display:block}
+.moon-cap{font-size:12px;letter-spacing:.15em;opacity:.8;margin-bottom:24px}
 @keyframes glow{50%{filter:drop-shadow(0 0 40px #38bdf8)}}
 h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(26px,6vw,52px);margin:0 0 10px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 0 20px rgba(125,211,252,.6)}
 h2{font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.08em;font-size:22px;text-transform:uppercase;margin-top:40px}
 p.sub{opacity:.85;letter-spacing:.1em;text-transform:lowercase;margin-bottom:25px}
 
-/* Countdown Timer Styling */
 .countdown-box{display:flex;gap:12px;justify-content:center;margin:20px 0 30px}
 .time-block{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:65px;backdrop-filter:blur(8px)}
 .time-val{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;color:var(--cy);text-shadow:0 0 10px var(--cy)}
 .time-lbl{font-size:10px;letter-spacing:.1em;opacity:.7;margin-top:4px;text-transform:uppercase}
 
-/* Constellation / Phases styling */
 .constellation{position:relative;margin:30px 0 60px;padding-left:30px;border-left:2px dashed var(--cy)}
 .phase-node{position:relative;margin-bottom:30px;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:16px 20px;backdrop-filter:blur(10px)}
 .phase-node::before{content:'';position:absolute;left:-37px;top:20px;width:12px;height:12px;background:var(--cy);border-radius:50%;box-shadow:0 0 10px var(--cy), 0 0 20px var(--cy)}
 .phase-num{font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:.15em;color:var(--cy);text-transform:uppercase;margin-bottom:6px}
 .phase-title{font-family:'Unbounded',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 
-/* Boarding Pass Styling */
 .pass-card{background:linear-gradient(135deg, rgba(255,255,255,.18) 0%, rgba(2,11,20,.6) 100%);border:2px dashed var(--cy);border-radius:20px;padding:24px;max-width:480px;margin:20px auto;backdrop-filter:blur(12px);box-shadow:0 0 30px rgba(125,211,252,.25);position:relative;text-align:left}
 .pass-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px}
 .pass-header b{font-family:'Unbounded',sans-serif;letter-spacing:.2em;color:var(--cy);font-size:14px}
@@ -50,6 +48,8 @@ p.sub{opacity:.85;letter-spacing:.1em;text-transform:lowercase;margin-bottom:25p
 .pass-item small{display:block;font-size:10px;opacity:.7;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
 .pass-item span{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700}
 .pass-footer{border-top:1px dashed var(--line);padding-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:11px;opacity:.8}
+.pass-reset-icon{position:absolute;bottom:14px;right:18px;background:none;border:none;color:var(--cy);cursor:pointer;font-size:16px;padding:0;opacity:0.6;transition:.2s}
+.pass-reset-icon:hover{opacity:1;transform:scale(1.15)}
 
 .tl{border-left:1px solid var(--line);padding-left:20px;margin-top:20px}
 .card{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 20px;backdrop-filter:blur(10px);margin-bottom:16px}
@@ -77,19 +77,120 @@ textarea{min-height:150px;resize:vertical}
 .msg{white-space:pre-wrap;line-height:1.6;font-size:14px}
 .row{display:flex;gap:8px;margin-top:10px}.row button{flex:1;padding:6px;border-radius:10px;border:1px solid var(--line);background:var(--glass);color:#fff;cursor:pointer}
 .empty{opacity:.7;text-align:center}
+.pass-card.print{animation:printIn 1.3s cubic-bezier(.2,.8,.2,1) both;overflow:hidden}
+@keyframes printIn{0%{clip-path:inset(0 0 100% 0);transform:translateY(-30px);opacity:0}100%{clip-path:inset(-60px);transform:none;opacity:1}}
+.pass-card.print::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%);animation:shine 1.1s 1.5s ease forwards}
+@keyframes shine{to{transform:translateX(120%)}}
+.pass-card.print .pass-header,.pass-card.print .pass-item,.pass-card.print .pass-footer{opacity:0;animation:fi .6s ease forwards}
+.pass-card.print .pass-header{animation-delay:.4s}
+.pass-card.print .pass-item:nth-child(1){animation-delay:.7s}
+.pass-card.print .pass-item:nth-child(2){animation-delay:.9s}
+.pass-card.print .pass-item:nth-child(3){animation-delay:1.1s}
+.pass-card.print .pass-item:nth-child(4){animation-delay:1.3s}
+.pass-card.print .pass-footer{animation-delay:1.5s}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pass-card.print .pass-item:nth-child(4) span{display:inline-block;animation:stamp .5s 1.6s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes stamp{from{opacity:0;transform:scale(2.5) rotate(-12deg)}to{opacity:1;transform:none}}
+/* ===== Scroll reveal ===== */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv-l{transform:translateX(-44px)}
+.rv-z{transform:scale(.88)}
+.rv.in{opacity:1;transform:none}
+.phase-node::before{transform:scale(0);transition:transform .5s .35s cubic-bezier(.3,1.8,.5,1)}
+.phase-node.in::before{transform:scale(1)}
+.hero>:not(.moon){animation:heroIn 1s cubic-bezier(.2,.8,.2,1) both}
+.hero>.moon-cap{animation-delay:.3s}.hero>h1{animation-delay:.45s}.hero>p.sub{animation-delay:.6s}.hero>.countdown-box{animation-delay:.75s}
+.moon svg{animation:moonIn 1.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes moonIn{from{opacity:0;transform:scale(.4) rotate(-40deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.phase-node::before{transform:none}.hero>*,.moon svg{animation:none}}
+/* ===== Global Core Energy Charge ===== */
+#energy{text-align:center}
+#energy-box{--c1:#7dd3fc;--c2:#0a6e9e;--p:0}
+.orb-wrap{position:relative;width:220px;height:220px;margin:36px auto 30px}
+.orb{position:absolute;inset:0;border-radius:50%;cursor:pointer;
+background:radial-gradient(circle at 32% 28%,#fff 0,var(--c1) 22%,var(--c2) 62%,#020b14 100%);
+box-shadow:0 0 calc(30px + var(--p)*70px) var(--c1),inset -12px -16px 40px rgba(0,0,0,.45);
+animation:orbPulse 3s ease-in-out infinite;transition:box-shadow .8s,background .8s}
+.orb::after{content:'';position:absolute;inset:0;border-radius:50%;opacity:0;mix-blend-mode:screen;
+background:conic-gradient(from 0deg,#7dd3fc,#a78bfa,#f0abfc,#fda4af,#fde68a,#7dd3fc);
+-webkit-mask:radial-gradient(circle,transparent 18%,#000 70%);mask:radial-gradient(circle,transparent 18%,#000 70%);
+animation:spin 8s linear infinite;transition:opacity 1.2s}
+.orb.galaxy::after{opacity:.8}
+.orb.boom{animation:orbBoom .55s ease-out}
+.ring{position:absolute;inset:-22px;border-radius:50%;border:2px dashed var(--c1);opacity:.7;animation:spin 18s linear infinite;pointer-events:none}
+.ring.r2{inset:-40px;border:1px solid var(--c1);opacity:.4;transform:rotateX(72deg);animation:none}
+.ripple{position:absolute;inset:0;border-radius:50%;border:2px solid var(--c1);pointer-events:none;animation:ripple .9s ease-out forwards}
+@keyframes orbPulse{50%{transform:scale(1.04)}}
+@keyframes orbBoom{0%{transform:scale(1)}30%{transform:scale(1.18);filter:brightness(1.8)}100%{transform:scale(1)}}
+@keyframes ripple{from{transform:scale(1);opacity:.9}to{transform:scale(2.2);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.energy-count{font-family:'Unbounded',sans-serif;font-size:clamp(15px,4vw,20px);font-weight:900;color:var(--c1);text-shadow:0 0 12px var(--c1);transition:color .8s}
+.energy-bar{height:6px;max-width:360px;margin:16px auto 8px;border-radius:6px;background:rgba(255,255,255,.15);overflow:hidden}
+.energy-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7dd3fc,#a78bfa,#f0abfc,#fda4af);box-shadow:0 0 10px var(--c1);transition:width .5s}
+.energy-stage{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.8;margin-bottom:22px}
+.energy-btn{width:auto;padding:14px 40px}
+.plus{position:absolute;left:50%;top:40%;font-family:'Unbounded',sans-serif;font-weight:900;color:#fff;text-shadow:0 0 12px var(--c1);pointer-events:none;z-index:3}
+.spark{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px var(--c1);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.orb,.orb::after,.ring{animation:none}}
+.energy-done{cursor:pointer;animation:heroIn .9s ease both}
+.energy-done p:first-child{font-family:'Unbounded',sans-serif;font-weight:900;font-size:16px;color:var(--c1);text-shadow:0 0 14px var(--c1);margin:0 0 8px;text-transform:lowercase}
+.energy-done .arrow{font-size:30px;color:var(--c1);animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){.energy-done .arrow{animation:none}}
+/* ===== Quantum Teleport Portal ===== */
+#portal{text-align:center;padding-bottom:140px}
+.portal-wrap{position:relative;width:250px;height:250px;margin:40px auto 10px;cursor:pointer;outline:none}
+.portal{position:absolute;inset:0;border-radius:50%;transition:transform .5s cubic-bezier(.2,.8,.2,1);
+background:conic-gradient(from 0deg,#020b14,#0a3a5c,#7dd3fc,#0a3a5c,#020b14,#1e6091,#7dd3fc,#0a3a5c,#020b14);
+box-shadow:0 0 50px #7dd3fc,0 0 120px rgba(125,211,252,.5),inset 0 0 50px #7dd3fc;
+animation:spin 9s linear infinite,portalPulse 4s ease-in-out infinite}
+.portal::before{content:'';position:absolute;inset:14%;border-radius:50%;
+background:conic-gradient(from 90deg,#020b14,#38bdf8,#0a3a5c,#7dd3fc,#020b14,#1e6091,#38bdf8,#020b14);
+animation:spin 5s linear infinite reverse;opacity:.9}
+.portal::after{content:'';position:absolute;inset:0;border-radius:50%;
+background:radial-gradient(circle,#000 0,#020b14 14%,rgba(2,11,20,.7) 30%,transparent 62%)}
+.portal-wrap:hover .portal,.portal-wrap:focus-visible .portal{transform:scale(1.07)}
+.portal-ring{position:absolute;inset:-14px;border-radius:50%;border:2px solid #7dd3fc;box-shadow:0 0 18px #7dd3fc,inset 0 0 18px #7dd3fc;pointer-events:none;animation:portalPulse 4s ease-in-out infinite}
+.portal-ring.r2{inset:-34px;border:1px dashed #7dd3fc;box-shadow:none;opacity:.5;animation:spin 25s linear infinite reverse}
+@keyframes portalPulse{50%{filter:brightness(1.35);opacity:.85}}
+#warp{position:fixed;inset:0;width:100%;height:100%;z-index:40;pointer-events:none;opacity:0;transition:opacity .3s}
+#warp.out{transition:opacity .7s}
+.tint{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.5s;mix-blend-mode:screen;
+background:linear-gradient(135deg,rgba(255,0,200,.38),rgba(0,229,255,.32),rgba(124,58,237,.4))}
+html.neon .tint{opacity:1;animation:tintShift 7s linear infinite}
+@keyframes tintShift{to{filter:hue-rotate(360deg)}}
+html.neon{--cy:#00f0ff;--glass:rgba(255,255,255,.17)}
+.toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;
+padding:12px 22px;border-radius:30px;background:rgba(2,11,20,.8);border:1px solid var(--cy);color:#fff;font-size:13px;letter-spacing:.08em;
+box-shadow:0 0 20px var(--cy);backdrop-filter:blur(8px);text-transform:lowercase;animation:heroIn .6s ease both;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.portal,.portal::before,.portal-ring{animation:none}}
+/* ===== Landing popup + anonymous feedback ===== */
+#land{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.62);backdrop-filter:blur(5px);z-index:60;padding:20px}
+.land-card{max-width:420px;width:100%;text-align:center;margin:0;animation:heroIn .7s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 0 40px rgba(125,211,252,.35)}
+.land-card .big{font-size:34px;margin-bottom:6px}
+.land-card p{line-height:1.65;font-size:15px;margin:8px 0 18px}
+.land-card .tk{font-size:11px;letter-spacing:.12em;color:var(--cy);margin:0 0 6px;opacity:.9}
+.land-card textarea{min-height:120px;text-transform:none;margin-bottom:6px}
+.land-card .note{font-size:11px;opacity:.65;margin:4px 0 14px}
+.land-btns{display:flex;gap:10px}.land-btns .go{flex:1;padding:12px;font-size:12px}
+.land-btns .ghost{background:transparent;border-color:var(--line)}
+.bar button.on{border-color:#fff;box-shadow:0 0 10px var(--cy)}
 </style>
 </head>
 <body>
 <canvas id="stars"></canvas>
+<div class="tint"></div>
+<canvas id="warp"></canvas>
 <header><b>RESONANCE</b><nav><a href="#about">about</a><a href="#pass">boarding pass</a><a href="#bio">biography</a><a href="#send">send a letter</a><a href="#wall">live wall</a><a href="#admin">admin</a><button id="mus" title="nhạc nền">♪ off</button></nav></header>
 <main>
 <div id="v-home">
 <section class="hero" id="about">
-<div class="moon" id="moon"></div>
+<div class="moon" id="moon"><svg viewBox="0 0 120 120"><defs><mask id="mm"><rect width="120" height="120" fill="#fff"/><circle id="shade" cx="60" cy="60" r="60" fill="#000"/></mask></defs><circle cx="60" cy="60" r="60" fill="#fff" mask="url(#mm)"/></svg></div>
+<div class="moon-cap" id="moon-cap"></div>
 <h1>PROJECT 25: RESONANCE</h1>
 <p class="sub">five phases, one heartbeat.</p>
 
-<!-- Countdown Timer đến 19/11/2026 -->
 <div class="countdown-box">
   <div class="time-block"><div class="time-val" id="d">00</div><div class="time-lbl">ngày</div></div>
   <div class="time-block"><div class="time-val" id="h">00</div><div class="time-lbl">giờ</div></div>
@@ -98,11 +199,23 @@ textarea{min-height:150px;resize:vertical}
 </div>
 </section>
 
-<!-- Section Boarding Pass độc bản -->
 <section id="pass">
 <h2>SPACE BOARDING PASS</h2>
 <p class="sub">nhận vé hành trình độc bản lên chuyến tàu resonance</p>
 <div id="pass-box"></div>
+</section>
+
+<section id="energy">
+<h2>GLOBAL CORE ENERGY CHARGE</h2>
+<p class="sub">mỗi phans nạp 25 nhịp, cùng thắp sáng lõi năng lượng resonance</p>
+<div id="energy-box">
+  <div class="orb-wrap" id="orb-wrap"><div class="ring r2"></div><div class="ring"></div><div class="orb" id="orb"></div></div>
+  <div class="energy-count"><span id="en-n">0</span> / <span id="en-goal"></span> Energy Charged</div>
+  <div class="energy-bar"><i id="en-bar"></i></div>
+  <div class="energy-stage" id="en-stage"></div>
+  <button class="go energy-btn" id="en-btn">SEND ENERGY ⚡</button>
+  <div class="energy-done" id="en-done" hidden><p>đã nạp đầy năng lượng ✨</p><p class="sub" style="margin:0 0 10px">vuốt tiếp để tới trạm tiếp theo</p><div class="arrow">↓</div></div>
+</div>
 </section>
 
 <section>
@@ -131,6 +244,14 @@ textarea{min-height:150px;resize:vertical}
 <div>select your icon</div><div class="ics" id="ics"></div>
 <input class="hp" id="hp" tabindex="-1" autocomplete="off">
 <button class="go" id="sb">send into the universe ✨</button></form></section>
+
+<section id="portal">
+<h2>QUANTUM TELEPORT PORTAL</h2>
+<p class="sub">chạm vào cánh cổng để kích hoạt chế độ hyper-drive xuyên không gian</p>
+<div class="portal-wrap" id="portal-wrap" role="button" tabindex="0" aria-label="kích hoạt hyper-drive">
+  <div class="portal-ring r2"></div><div class="portal-ring"></div><div class="portal" id="portal"></div>
+</div>
+</section>
 </div>
 
 <div id="v-wall" hidden><section style="max-width:1200px"><h2>LIVE WALL</h2>
@@ -142,6 +263,27 @@ textarea{min-height:150px;resize:vertical}
 <div id="adm" hidden></div></section></div>
 </main>
 
+<div id="land"><div class="card land-card">
+  <div id="land-1">
+    <div class="big">🛬</div>
+    <p>chúc mừng bạn đã hạ cánh thành công xuống trạm tuổi 25 của lê phan. cất giữ chiếc vé này và mang theo thật nhiều năng lượng tích cực để cùng đếm ngược đến ngày bùng nổ nhé! ✨</p>
+    <div class="tk" id="land-tk"></div>
+    <button class="go" id="land-next">tiếp tục</button>
+  </div>
+  <div id="land-2" hidden>
+    <div class="big">💌</div>
+    <p style="margin-bottom:12px">bạn có muốn feedback/góp ý gì cho Paradox không?</p>
+    <textarea id="fb-tx" maxlength="500" placeholder="viết gì cũng được nha..."></textarea>
+    <div class="cnt"><span id="fb-c">0</span>/500</div>
+    <div class="note">hoàn toàn ẩn danh, không lưu tên hay thông tin của bạn</div>
+    <div class="land-btns"><button class="go ghost" id="fb-skip">để sau</button><button class="go" id="fb-send">gửi ẩn danh</button></div>
+  </div>
+  <div id="land-3" hidden>
+    <div class="big">💙</div>
+    <p>cảm ơn bạn! góp ý đã được gửi ẩn danh tới Paradox.</p>
+  </div>
+</div></div>
+
 <div id="pop"><div class="card"><p>thư của bạn đã được gửi vào vũ trụ RESONANCE. cảm ơn bạn!</p><button class="go" onclick="this.closest('#pop').style.display='none'">đóng</button></div></div>
 
 <script>
@@ -151,11 +293,12 @@ const save=a=>{try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}};
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=id=>document.getElementById(id);
 
+let neonOn=false;
 /* Starfield background */
 const cv=$('stars'),cx=cv.getContext('2d');let S=[];
 function rs(){cv.width=innerWidth;cv.height=innerHeight;S=Array.from({length:Math.min(140,innerWidth/8)},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4+.3,p:Math.random()*6,v:Math.random()*.02+.005}))}
 addEventListener('resize',rs);rs();
-(function t(){cx.clearRect(0,0,cv.width,cv.height);for(const s of S){s.p+=s.v*3;cx.globalAlpha=.35+.65*Math.abs(Math.sin(s.p));cx.fillStyle='#7dd3fc';cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill();s.y-=s.v;if(s.y<0)s.y=cv.height}requestAnimationFrame(t)})();
+(function t(){cx.clearRect(0,0,cv.width,cv.height);for(const s of S){s.p+=s.v*3;cx.globalAlpha=.35+.65*Math.abs(Math.sin(s.p));cx.fillStyle=neonOn?'hsl('+((Date.now()/8+s.x)%360|0)+',100%,75%)':'#7dd3fc';cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill();s.y-=s.v*(neonOn?4:1);if(s.y<0)s.y=cv.height}requestAnimationFrame(t)})();
 
 /* Countdown Timer đến 19/11/2026 */
 const targetDate = new Date('2026-11-19T00:00:00').getTime();
@@ -178,15 +321,44 @@ function updateCountdown(){
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-/* Boarding Pass Logic (Độc bản 1 lần duy nhất trên máy) */
+/* Mặt trăng đổi pha theo thời gian thực (đầy dần tới 19/11/2026) */
+const START = new Date('2026-10-01T00:00:00').getTime(); /* chỉnh mốc bắt đầu ở đây */
+function updateMoon(){
+  const now = Date.now();
+  const p = Math.min(1, Math.max(0, (now - START) / (targetDate - START)));
+  $('shade').setAttribute('cx', 60 - (20 + p * 105));
+  const days = Math.ceil((targetDate - now) / 864e5);
+  $('moon-cap').textContent = p >= 1 ? 'trăng tròn, hôm nay là ngày ✨' : `trăng ${Math.round(p*100)}% · còn ${days} ngày đến trăng tròn`;
+}
+updateMoon();setInterval(updateMoon,60000);
+
+/* Tiếng "tách" khi in vé (tạo bằng Web Audio, không cần file) */
+let AC=null;
+function click(t,f,v){
+  const o=AC.createOscillator(),g=AC.createGain();
+  o.type='square';o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f/3,t+.05);
+  g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+.06);
+  o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.07);
+}
+function printSound(){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended')AC.resume();
+    const t=AC.currentTime;
+    [.4,.7,.9,1.1,1.3,1.5].forEach(d=>click(t+d,1800,.05)); /* tách tách theo từng ô */
+    click(t+1.6,300,.18); /* tiếng "cộp" lúc đóng dấu verified */
+  }catch(e){}
+}
+
+/* Boarding Pass Logic */
 const PASS_KEY = 'res_space_pass';
-function renderPass(){
+function renderPass(anim){
   const box = $('pass-box');
   const savedPass = localStorage.getItem(PASS_KEY);
   if(savedPass){
     const p = JSON.parse(savedPass);
     box.innerHTML = `
-      <div class="pass-card">
+      <div class="pass-card${anim?' print':''}">
         <div class="pass-header">
           <b>FLIGHT: RESONANCE</b>
           <span style="font-size:12px; color:var(--cy)">#25</span>
@@ -201,9 +373,13 @@ function renderPass(){
           <span>serial: ${p.serial}</span>
           <span>exclusive pass</span>
         </div>
+        <button class="pass-reset-icon" id="btn-reset-pass" title="tạo lại vé">🔄</button>
       </div>
-      <p style="font-size:12px; opacity:0.6; margin-top:10px">vé thông hành độc bản của bạn đã được lưu trữ an toàn trên thiết bị này.</p>
     `;
+    $('btn-reset-pass').onclick = () => {
+      localStorage.removeItem(PASS_KEY);
+      renderPass();
+    };
   } else {
     box.innerHTML = `
       <form id="pass-form" style="max-width:400px; margin:auto">
@@ -220,7 +396,8 @@ function renderPass(){
       const serialNum = 'RES-' + Math.floor(100000 + Math.random() * 900000);
       const passData = { name: nameVal, date: dateStr, serial: serialNum };
       localStorage.setItem(PASS_KEY, JSON.stringify(passData));
-      renderPass();
+      renderPass(true);
+      printSound();
     };
   }
 }
@@ -250,7 +427,7 @@ $('ics').innerHTML=['🩵','🦊','💝','🌙','✨'].map(i=>`<button type="but
 $('ics').onclick=e=>{if(e.target.tagName!=='BUTTON')return;icon=e.target.textContent;[...$('ics').children].forEach(b=>b.classList.toggle('on',b===e.target))};
 $('tx').oninput=()=>$('c').textContent=$('tx').value.length;
 $('f').onsubmit=e=>{e.preventDefault();
- if($('hp').value)return; 
+ if($('hp').value)return;
  const day=new Date().toDateString();let rl={};try{rl=JSON.parse(localStorage.getItem('res_rl'))||{}}catch(_){}
  if(rl.d!==day)rl={d:day,n:0};
  if(rl.n>=3){alert('bạn đã gửi tối đa 3 thư hôm nay, mai quay lại nhé 🌙');return}
@@ -278,9 +455,22 @@ $('q').oninput=renderWall;$('b-fs').onclick=()=>document.documentElement.request
 /* admin */
 let ok=false;
 $('lgb').onclick=()=>{if($('pin').value==='1009'){ok=true;$('lg').hidden=true;$('adm').hidden=false;renderAdm()}else alert('sai mã')};
-function renderAdm(){const a=load().sort((x,y)=>y.ts-x.ts);
- $('adm').innerHTML=a.length?a.map(x=>`<div class="card"><small>trạng thái: ${x.status}</small><div class="msg">${esc(x.text)}</div><p><small>${esc(x.name)} ${x.icon}</small></p><div class="row"><button data-i="${x.id}" data-s="approved">approve</button><button data-i="${x.id}" data-s="hidden">hide</button></div></div>`).join(''):'<p class="empty">chưa có thư nào</p>'}
-$('adm').onclick=e=>{const b=e.target.closest('button');if(!b||!ok)return;const a=load();const l=a.find(x=>x.id===b.dataset.i);if(l){l.status=b.dataset.s;save(a);renderAdm()}};
+let admTab='letters';
+function renderAdm(){
+ const L=load().sort((x,y)=>y.ts-x.ts),F=fbLoad().sort((x,y)=>y.ts-x.ts),un=F.filter(x=>!x.read).length;
+ let body;
+ if(admTab==='letters'){
+  body=L.length?L.map(x=>`<div class="card"><small>trạng thái: ${x.status}</small><div class="msg">${esc(x.text)}</div><p><small>${esc(x.name)} ${x.icon}</small></p><div class="row"><button data-i="${x.id}" data-s="approved">approve</button><button data-i="${x.id}" data-s="hidden">hide</button></div></div>`).join(''):'<p class="empty">chưa có thư nào</p>';
+ }else{
+  body=F.length?F.map(x=>`<div class="card"><small>${x.read?'':'● mới · '}${new Date(x.ts).toLocaleString('vi-VN')}</small><div class="msg">${esc(x.text)}</div><div class="row"><button data-f="${x.id}">xóa</button></div></div>`).join(''):'<p class="empty">chưa có tin nhắn ẩn danh nào</p>';
+  if(un){F.forEach(x=>x.read=true);fbSave(F)}
+ }
+ $('adm').innerHTML=`<div class="bar"><button data-tab="letters" class="${admTab==='letters'?'on':''}">thư (${L.length})</button><button data-tab="fb" class="${admTab==='fb'?'on':''}">tin nhắn ẩn danh (${F.length})${un&&admTab!=='fb'?' ●':''}</button></div>`+body;
+}
+$('adm').onclick=e=>{const b=e.target.closest('button');if(!b||!ok)return;
+ if(b.dataset.tab){admTab=b.dataset.tab;renderAdm();return}
+ if(b.dataset.f){fbSave(fbLoad().filter(x=>x.id!==b.dataset.f));renderAdm();return}
+ const a=load();const l=a.find(x=>x.id===b.dataset.i);if(l){l.status=b.dataset.s;save(a);renderAdm()}};
 
 /* router + live sync */
 function route(){const h=location.hash;const w=h==='#wall',ad=h==='#admin';
@@ -290,10 +480,157 @@ addEventListener('hashchange',route);
 addEventListener('storage',e=>{if(e.key===K){if(!$('v-wall').hidden)renderWall();if(!$('v-admin').hidden&&ok)renderAdm()}});
 route();
 
+/* ===== Global Core Energy Charge ===== */
+const EN_KEY='res_energy', EN_GOAL=25; /* số lần mỗi người được nạp */
+const STAGES=[
+  {at:0,   c1:'#7dd3fc',c2:'#0a6e9e',name:'stage 1 · ignite'},
+  {at:.25, c1:'#a5b4fc',c2:'#4338ca',name:'stage 2 · charging'},
+  {at:.5,  c1:'#f0abfc',c2:'#a21caf',name:'stage 3 · overdrive'},
+  {at:.75, c1:'#c4b5fd',c2:'#6d28d9',name:'stage 4 · galaxy core'}
+];
+const enGet=()=>{try{return Math.min(EN_GOAL,Math.max(0,parseInt(localStorage.getItem(EN_KEY))||0))}catch(e){return 0}};
+const enSet=n=>{try{localStorage.setItem(EN_KEY,String(n))}catch(e){}};
+const fmt=n=>n.toLocaleString('vi-VN');
+function enRender(){
+  const n=enGet(),p=n/EN_GOAL;
+  let st=0;STAGES.forEach((x,i)=>{if(p>=x.at)st=i});
+  const b=$('energy-box'),S=STAGES[st];
+  b.style.setProperty('--c1',S.c1);b.style.setProperty('--c2',S.c2);b.style.setProperty('--p',p.toFixed(3));
+  $('orb').classList.toggle('galaxy',st===3);
+  $('en-n').textContent=fmt(n);$('en-goal').textContent=fmt(EN_GOAL);
+  $('en-bar').style.width=(p*100)+'%';
+  const full=n>=EN_GOAL;
+  $('en-stage').textContent=full?'fully charged':S.name;
+  $('en-btn').hidden=full;$('en-done').hidden=!full;
+}
+function enSound(p){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended')AC.resume();
+    const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();
+    o.type='sine';o.frequency.setValueAtTime(300+p*500,t);o.frequency.exponentialRampToValueAtTime(900+p*900,t+.18);
+    g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.0001,t+.25);
+    o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.26);
+  }catch(e){}
+}
+let enLast=0;
+function sendEnergy(){
+  const now=Date.now();if(now-enLast<150)return;enLast=now;
+  const n=enGet();if(n>=EN_GOAL)return;
+  enSet(n+1);enRender();enSound((n+1)/EN_GOAL);
+  const wrap=$('orb-wrap'),orb=$('orb');
+  orb.classList.remove('boom');void orb.offsetWidth;orb.classList.add('boom');
+  const r=document.createElement('div');r.className='ripple';wrap.appendChild(r);setTimeout(()=>r.remove(),950);
+  const pl=document.createElement('div');pl.className='plus';pl.textContent='+1';wrap.appendChild(pl);
+  pl.animate([{transform:'translate(-50%,0)',opacity:1},{transform:'translate(-50%,-70px)',opacity:0}],{duration:900,easing:'ease-out'}).onfinish=()=>pl.remove();
+  const big=(n+1>=EN_GOAL);
+  for(let i=0;i<(big?40:10);i++){
+    const sp=document.createElement('div');sp.className='spark';wrap.appendChild(sp);
+    const a=Math.random()*Math.PI*2,d=(big?150:90)+Math.random()*60;
+    sp.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.2)`,opacity:0}],{duration:650+Math.random()*350,easing:'ease-out'}).onfinish=()=>sp.remove();
+  }
+}
+$('en-done').onclick=()=>{const nx=$('energy').nextElementSibling;if(nx)nx.scrollIntoView({behavior:'smooth'})};
+$('en-btn').onclick=sendEnergy;$('orb').onclick=sendEnergy;
+addEventListener('storage',e=>{if(e.key===EN_KEY)enRender()});
+enRender();
+
+/* ===== Quantum Teleport Portal: hyper-drive ===== */
+const TELEPORT_TOP=true;  /* true: lúc warp sẽ "dịch chuyển" lên đầu trang. đổi false nếu không muốn */
+const NEON_MS=20000;      /* thời gian giữ theme neon (ms) */
+let warping=false,neonTimer=null;
+function whoosh(){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended')AC.resume();
+    const t=AC.currentTime,o=AC.createOscillator(),f=AC.createBiquadFilter(),g=AC.createGain();
+    o.type='sawtooth';o.frequency.setValueAtTime(60,t);o.frequency.exponentialRampToValueAtTime(1400,t+2.2);
+    f.type='lowpass';f.frequency.setValueAtTime(300,t);f.frequency.exponentialRampToValueAtTime(5000,t+2.2);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.09,t+1.6);g.gain.exponentialRampToValueAtTime(.0001,t+2.9);
+    o.connect(f);f.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+3);
+  }catch(e){}
+}
+function toast(msg){
+  const d=document.createElement('div');d.className='toast';d.textContent=msg;document.body.appendChild(d);
+  setTimeout(()=>{d.style.transition='opacity .6s';d.style.opacity=0;setTimeout(()=>d.remove(),700)},3500);
+}
+function neonShift(){
+  neonOn=true;document.documentElement.classList.add('neon');
+  clearTimeout(neonTimer);
+  neonTimer=setTimeout(()=>{neonOn=false;document.documentElement.classList.remove('neon')},NEON_MS);
+}
+function hyperDrive(){
+  if(warping)return;warping=true;
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){neonShift();warping=false;showLanding();return}
+  const cv2=$('warp'),c=cv2.getContext('2d');
+  cv2.width=innerWidth;cv2.height=innerHeight;cv2.classList.remove('out');
+  const W=cv2.width,H=cv2.height,mx=W/2,my=H/2,maxR=Math.hypot(W,H)/2;
+  const st=Array.from({length:320},()=>({a:Math.random()*6.283,r:Math.random()*maxR*.5+5,v:Math.random()*.8+.4,h:190+Math.random()*90}));
+  const T=2800,t0=performance.now();
+  cv2.style.opacity=1;whoosh();
+  setTimeout(()=>{neonShift();if(TELEPORT_TOP)scrollTo({top:0,behavior:'instant'})},1500);
+  setTimeout(()=>{cv2.classList.add('out');cv2.style.opacity=0},T-600);
+  (function f(now){
+    const t=now-t0,k=Math.min(1,t/T),e=k<.8?Math.pow(k/.8,2):1,sp=1+36*e;
+    c.fillStyle='rgba(2,8,22,.35)';c.fillRect(0,0,W,H);
+    for(const s of st){
+      const pr=s.r;s.r+=s.v*sp*(1+s.r/(maxR*.4));
+      const ca=Math.cos(s.a),sa=Math.sin(s.a);
+      c.strokeStyle='hsl('+s.h+',100%,'+(70+e*20)+'%)';c.lineWidth=1+s.r/maxR*2.2;
+      c.beginPath();c.moveTo(mx+ca*pr,my+sa*pr);c.lineTo(mx+ca*s.r,my+sa*s.r);c.stroke();
+      if(s.r>maxR){s.r=Math.random()*20+5;s.a=Math.random()*6.283}
+    }
+    if(t<T)requestAnimationFrame(f);
+    else{c.clearRect(0,0,W,H);warping=false;setTimeout(showLanding,500)}
+  })(t0);
+}
+$('portal-wrap').onclick=hyperDrive;
+$('portal-wrap').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hyperDrive()}};
+
+/* ===== Landing popup + feedback ẩn danh ===== */
+const FK='res_feedback';
+const fbLoad=()=>{try{return JSON.parse(localStorage.getItem(FK))||[]}catch(e){return[]}};
+const fbSave=a=>{try{localStorage.setItem(FK,JSON.stringify(a))}catch(e){}};
+function landStep(n){[1,2,3].forEach(i=>$('land-'+i).hidden=i!==n)}
+function showLanding(){
+  let tk='';try{const p=JSON.parse(localStorage.getItem(PASS_KEY));if(p)tk='✦ vé của bạn: '+esc(p.name)+' · '+p.serial}catch(e){}
+  $('land-tk').innerHTML=tk;landStep(1);$('land').style.display='flex';
+}
+const landClose=()=>{$('land').style.display='none';$('fb-tx').value='';$('fb-c').textContent=0};
+$('land-next').onclick=()=>{landStep(2);$('fb-tx').focus()};
+$('fb-tx').oninput=()=>$('fb-c').textContent=$('fb-tx').value.length;
+$('fb-skip').onclick=landClose;
+$('fb-send').onclick=()=>{
+  const t=$('fb-tx').value.trim().slice(0,500);if(!t){$('fb-tx').focus();return}
+  const a=fbLoad();a.push({id:Date.now()+''+Math.random().toString(36).slice(2,6),text:t,ts:Date.now(),read:false});fbSave(a);
+  landStep(3);setTimeout(landClose,2200);
+};
+addEventListener('storage',e=>{if(e.key===FK&&!$('v-admin').hidden&&ok)renderAdm()});
+
+/* Scroll reveal: lướt tới đâu hiện tới đó */
+(function(){
+  const tag=(sel,cls,step)=>document.querySelectorAll(sel).forEach((el,i)=>{
+    el.classList.add('rv');if(cls)el.classList.add(cls);
+    el.style.setProperty('--d',((i%(step||3))*.12)+'s')});
+  tag('#v-home section:not(.hero) h2,#v-home h3');
+  tag('#pass-box');
+  tag('.phase-node','rv-l',5);
+  tag('.tl .card');
+  tag('#f','rv-z');
+  tag('#energy-box','rv-z');
+  tag('.portal-wrap','rv-z');
+  const els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+  }),{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(e=>io.observe(e));
+})();
+
 /* nhạc nền auto-on (file audio.m4a) */
 let au = new Audio('audio.m4a');
 au.loop = true;
-
 au.play().then(() => {
     $('mus').textContent = '♪ on';
 }).catch(() => {
@@ -307,7 +644,6 @@ au.play().then(() => {
     document.addEventListener('click', unlockAudio);
     document.addEventListener('touchstart', unlockAudio);
 });
-
 $('mus').onclick = () => {
     if (au.paused) {
         au.play().catch(() => {});
